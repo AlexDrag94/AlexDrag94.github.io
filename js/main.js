@@ -119,27 +119,6 @@ $(document).ready(function() {
           for(var j = 0; j < y; j ++) {
             if($(this).is(tiles[i][j])) {
 
-              if(e.which === 1 && !flags[i][j] && !pressed[i][j]) {
-                if(!spawned) {
-                  spawn(i, j);
-                }
-                if(bombs[i][j]) {
-                  $('.tile').css('pointer-events', 'none');
-                  $('button').html('You lost...');
-                  for(var k = 0; k < x; k ++) {
-                    for(var l = 0; l < y; l ++) {
-                      if(bombs[k][l] && !flags[k][l]) {
-                        $(tiles[k][l]).css('background-color', 'red');
-                        $(tiles[k][l]).append('<img src="assets/bomb.jpg">');
-                      }
-                    }
-                  }
-                }
-                else {
-                  clear(i, j);
-                }
-              }
-
               if(e.which === 1 && pressed[i][j]) {
                 var numFlags = 0;
                 for(var m = i - 1; m <= i + 1 && m < x; m ++) {
@@ -172,6 +151,27 @@ $(document).ready(function() {
                       }
                     }
                   }
+                }
+              }
+
+              if(e.which === 1 && !flags[i][j] && !pressed[i][j]) {
+                if(!spawned) {
+                  spawn(i, j);
+                }
+                if(bombs[i][j]) {
+                  $('.tile').css('pointer-events', 'none');
+                  $('button').html('You lost...');
+                  for(var k = 0; k < x; k ++) {
+                    for(var l = 0; l < y; l ++) {
+                      if(bombs[k][l] && !flags[k][l]) {
+                        $(tiles[k][l]).css('background-color', 'red');
+                        $(tiles[k][l]).append('<img src="assets/bomb.jpg">');
+                      }
+                    }
+                  }
+                }
+                else {
+                  clear(i, j);
                 }
               }
 
