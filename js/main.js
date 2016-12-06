@@ -140,6 +140,41 @@ $(document).ready(function() {
                 }
               }
 
+              if(e.which === 1 && pressed[i][j]) {
+                var numFlags = 0;
+                for(var m = i - 1; m <= i + 1 && m < x; m ++) {
+                  for(var n = j - 1; n <= j + 1 && n < y; n ++) {
+                    if(flags[m][n]) {
+                      numFlags ++;
+                    }
+                  }
+                }
+
+                if(numFlags === neighbours[i][j]) {
+                  for(var m = i - 1; m <= i + 1 && m < x; m ++) {
+                    for(var n = j - 1; n <= j + 1 && n < y; n ++) {
+                      if(m >= 0 && n >= 0 && !flags[m][n] && !pressed[m][n]) {
+                        if(bombs[m][n]) {
+                          $('.tile').css('pointer-events', 'none');
+                          $('button').html('You lost...');
+                          for(var k = 0; k < x; k ++) {
+                            for(var l = 0; l < y; l ++) {
+                              if(bombs[k][l] && !flags[k][l]) {
+                                $(tiles[k][l]).css('background-color', 'red');
+                                $(tiles[k][l]).append('<img src="assets/bomb.jpg">');
+                              }
+                            }
+                          }
+                        }
+                        else {
+                          clear(m, n);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
               if(e.which === 3 && !pressed[i][j]) {
                 if(!flags[i][j]) {
                   $(tiles[i][j]).append('<img src="assets/flag.jpg">');
