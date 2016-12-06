@@ -144,7 +144,7 @@ $(document).ready(function() {
                 var numFlags = 0;
                 for(var m = i - 1; m <= i + 1 && m < x; m ++) {
                   for(var n = j - 1; n <= j + 1 && n < y; n ++) {
-                    if(flags[m][n]) {
+                    if(m >= 0 && n >= 0 && flags[m][n]) {
                       numFlags ++;
                     }
                   }
